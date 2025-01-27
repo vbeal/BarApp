@@ -15,6 +15,13 @@ import { isAuthenticated } from "./middlewares/isAuthenticated";
 
 import uploadConfig from "./config/multer";
 import { RemoveOrderController } from "./controllers/order/RemoveOrderController";
+import { AddItensController } from "./controllers/order/AddIntensController";
+import { RemoveItemController } from "./controllers/order/RemoveItemController";
+import { SendOrderService } from "./services/order/SendOrderService";
+import { SendOrderController } from "./controllers/order/SendOrderController";
+import { ListOrdersController } from "./controllers/order/ListOrdersController";
+import { DetailOrderController } from "./controllers/order/DetailOrderController";
+import { FinishOrderController } from "./controllers/order/FinishOrderController";
 
 
 
@@ -43,5 +50,12 @@ routes.get("/category/product", isAuthenticated, new ListByCategoryController().
 routes.post("/order", isAuthenticated, new CreateOrderController().handle);
 routes.delete("/order", isAuthenticated, new RemoveOrderController().handle);
 
+// -- ROTAS ADD ITENS --
+routes.post("/order/add", isAuthenticated, new AddItensController().handle);
+routes.delete("/order/itemremove", isAuthenticated, new RemoveItemController().handle);
+routes.put("/order/send", isAuthenticated, new SendOrderController().handle);
+routes.get("/orders", isAuthenticated, new ListOrdersController().handle);
+routes.get("/order/detail", isAuthenticated, new DetailOrderController().handle);
+routes.put("/order/finish", isAuthenticated, new FinishOrderController().handle);
 
 export { routes };
